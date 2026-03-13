@@ -1,3 +1,7 @@
+---
+description: Create or update frontend code with correct AEM integration
+---
+
 Create or update frontend code that integrates correctly with this AEM repository.
 
 Requirements:

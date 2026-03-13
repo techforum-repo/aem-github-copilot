@@ -1,3 +1,7 @@
+---
+description: Draft a pull request summary including risks, modules changed, and testing notes
+---
+
 Draft a pull request summary for these changes.
 
 Include:

@@ -1,3 +1,7 @@
+---
+description: Investigate a bug across AEM modules with root cause and fix suggestions
+---
+
 Help investigate this bug in the context of this AEM repository.
 
 Approach:

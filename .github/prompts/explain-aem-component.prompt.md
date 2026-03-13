@@ -1,3 +1,7 @@
+---
+description: Explain an AEM component end to end including dialog, Sling Model, HTL, and frontend
+---
+
 Explain this AEM implementation end to end.
 
 Include:

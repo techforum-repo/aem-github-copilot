@@ -53,6 +53,7 @@ This repository is an Adobe Experience Manager project with multiple modules for
 - Prefer small, readable units of logic.
 - Watch for null-safety, maintainability, readability, and testability issues.
 - Point out likely code smells and the smallest safe fix.
+- Key rules to always check: Cognitive Complexity > 15 (java:S3776), resource leaks (java:S2095), null dereference (java:S2259), System.out/err usage (java:S106), hardcoded credentials (java:S2068), empty catch blocks (java:S108), string comparison with == (java:S4973), mutable static fields (java:S2696).
 
 ## Adobe Cloud Manager expectations
 - Consider AEM Cloud Manager code quality expectations when suggesting changes.
@@ -60,6 +61,33 @@ This repository is an Adobe Experience Manager project with multiple modules for
 - Avoid heavy logic in presentation layers.
 - Keep code secure, maintainable, and aligned with AEM engineering practices.
 - Mention likely pipeline or code quality risks when relevant.
+- Key rules to always check: ResourceResolver must be closed (CQBP-72), no Thread.sleep in Servlets/Jobs (CQBP-75), no System.out/err (CQBP-84), no deprecated APIs (CQBP-71), no ResourceResolver leaks (AMSCORE-304).
+- Key OakPAL rules: no OSGi config in ui.apps (belongs in ui.config), no mutable content in ui.apps, no immutable content in ui.content, no overlapping package filter roots, no rep:policy or authorizable nodes in packages unless explicitly reviewed.
+
+## AEM as a Cloud Service constraints
+This project targets AEMaaCS. The following constraints differ from AEM 6.x and must be respected:
+- **No admin ResourceResolver or admin Session** — all JCR access must use service users with least-privilege ACLs defined via Repoinit.
+- **No custom runmodes** beyond `author`, `publish`, `dev`, `stage`, `prod` — other runmode names (e.g., `local`, `uat`) are silently ignored.
+- **No bundle hot-deployment** — no `/system/console`, no CRX Package Manager installs in production. All deployments go through Cloud Manager pipeline.
+- **No mutable `/conf` editable template content in `ui.apps`** — editable template policies belong in `ui.content`.
+- **OSGi configurations belong in `ui.config`** — not in `ui.apps`.
+- **Service users and ACLs must be provisioned via Repoinit** in `ui.config`, not created or modified in Java code.
+- **Oak indexes must back all JCR queries** — unindexed queries are blocked or heavily penalized in AEMaaCS.
+
+## Security expectations
+- Never use admin ResourceResolver or admin Session — always use a service user.
+- Never use `${var @ context='unsafe'}` in HTL without a documented security review.
+- Never concatenate user input into JCR queries or repository paths.
+- Do not expose internal exception messages, JCR paths, or stack traces in HTTP responses.
+- Path-based Sling Servlet registration is publicly accessible — ensure Dispatcher filter rules protect it.
+- Do not log or store PII, tokens, or credentials.
+
+## Performance expectations
+- All JCR queries must be backed by an Oak index — validate with Query Debugger before committing.
+- Do not execute JCR queries in Sling Model `@PostConstruct` methods on every page render.
+- Use lazy initialization for expensive data in Sling Models.
+- Do not hold ResourceResolver or Session open beyond the immediate use scope.
+- OSGi services are singletons — never store request or session state in service instance fields.
 
 ## Additional guidance
 - Prefer nearby implementations in the same module as the primary pattern source.

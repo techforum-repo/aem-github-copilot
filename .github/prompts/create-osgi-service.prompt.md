@@ -1,3 +1,7 @@
+---
+description: Create or update an OSGi service following repository conventions
+---
+
 Create or update an OSGi service following repository conventions.
 
 Requirements:

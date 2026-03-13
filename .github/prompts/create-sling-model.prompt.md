@@ -1,3 +1,7 @@
+---
+description: Create or update a Sling Model following repository annotation and package conventions
+---
+
 Create or update a Sling Model for this AEM component.
 
 Requirements:

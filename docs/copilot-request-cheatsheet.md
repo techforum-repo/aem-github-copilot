@@ -1,3 +1,21 @@
+# How to use
+
+## Invoking prompts in Copilot Chat
+Open GitHub Copilot Chat in VS Code, then type `/` to see available prompts from `.github/prompts/`.
+Select the prompt from the list — it will be loaded into the chat with its requirements.
+Add context by dragging files into the chat or referencing them with `#<filename>`.
+
+## How scoped instructions work
+Files in `.github/instructions/` are automatically injected when you have a matching file open in the editor.
+You do not need to reference them manually — Copilot applies them based on the `applyTo` glob pattern.
+
+## Tips
+- Attach the relevant file(s) as context when invoking a prompt for best results.
+- For multi-file tasks, list each file explicitly in the chat after invoking the prompt.
+- Use the cheatsheet requests below as inline chat starting points (`Ctrl+I` / `Cmd+I` in the editor).
+
+---
+
 # COMPONENT - Explain a component
 Explain the AEM component at <ui.apps component path> and related files.
 
@@ -43,6 +61,18 @@ Explain how this frontend file is connected to AEM rendering, clientlibs, and au
 
 # FRONTEND - Create or update frontend code
 Create or update frontend code for <feature or component> following the conventions of this frontend module.
+
+# TEST - Create unit tests
+Create unit tests for this class following repository test conventions:
+<core java file path>
+
+# TEST - Review existing tests
+Review these tests for coverage gaps, over-mocking, missing edge cases, and AemContext misuse:
+<core test file path>
+
+# TEST - Add edge case coverage
+Identify the missing null, empty, and error-path test cases for this class and generate them:
+<core java file path>
 
 # QUALITY - General review
 Review these changes for AEM best practices, SonarCloud issues, Cloud Manager risks, null safety, duplication, complexity, and missing tests:
@@ -101,3 +131,36 @@ Explain this file in the context of the repository and related modules:
 # UNDERSTANDING - Onboard me to this area
 Help me understand this area of the repository, the main files involved, and what to inspect next:
 <folder path>
+
+# SERVLET - Create or update a Sling Servlet
+Create or update a Sling Servlet for <use case> following repository conventions.
+
+# SERVLET - Review a servlet
+Review this Sling Servlet for resource type vs path registration correctness, security, null safety, SonarCloud concerns, and Cloud Manager risks:
+<core servlet file path>
+
+# SCHEDULER - Create or update a Scheduler or Job
+Create or update an OSGi Scheduler or Sling Job for <use case> following repository conventions.
+
+# SCHEDULER - Review a scheduler or job
+Review this Scheduler or Job for Thread.sleep usage, admin resolver usage, exception handling, configurability, and Cloud Manager risks:
+<core scheduler/job file path>
+
+# WORKFLOW - Create a workflow process step
+Create a custom AEM workflow process step for <use case> following repository conventions.
+
+# SECURITY - Review for security issues
+Review these files for service user usage, HTL XSS context, input validation, admin resolver usage, and sensitive data exposure:
+- <file path 1>
+- <file path 2>
+
+# SECURITY - Create service user and Repoinit
+Create a Repoinit script and service user mapping for <service or use case> with least-privilege ACLs.
+
+# PERFORMANCE - Review for JCR query and performance issues
+Review this file for unindexed queries, queries in render paths, unbounded result sets, and ResourceResolver lifecycle issues:
+<file or folder path>
+
+# DISPATCHER - Review Dispatcher configuration
+Review this Dispatcher configuration for default-deny filters, sensitive path exposure, security response headers, cache rules, and Cloud Manager SDK compatibility:
+<dispatcher config file path>

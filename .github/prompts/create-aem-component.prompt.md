@@ -1,3 +1,7 @@
+---
+description: Create or update an AEM component following repository conventions
+---
+
 Create or update an AEM component following the conventions already used in this repository.
 
 Requirements:
