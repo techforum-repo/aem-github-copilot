@@ -4,24 +4,12 @@ applyTo: "devops/**/*"
 
 # Instructions for devops
 
-These files support deployment, automation, or environment-related workflows.
-
-## Guidance
-- Keep changes explicit and minimal.
-- Preserve current workflow assumptions unless requested otherwise.
-- Explain operational impact of changes.
-- Avoid hidden behavior changes in scripts or automation.
-
-## Cloud Manager pipeline awareness
-- Pipeline configuration changes affect all environments — treat them as deployment-critical.
-- Quality gate changes (coverage thresholds, SonarCloud ratings) must be intentional and agreed upon.
-- Environment variable additions or changes must be coordinated with the Cloud Manager environment setup.
-- Dispatcher configuration is validated during the pipeline — test with the Dispatcher SDK locally before pushing.
+## Cloud Manager awareness
+- Pipeline and quality gate changes affect all environments — treat as deployment-critical.
+- Environment variable additions must be coordinated with Cloud Manager environment setup.
+- Dispatcher config changes must be validated with the Dispatcher SDK locally before pushing.
 
 ## Review focus
-- deployment safety
-- environment assumptions
-- script readability
-- rollback considerations
+- deployment safety and rollback considerations
 - Cloud Manager pipeline impact
-- Dispatcher SDK compatibility if Dispatcher config is changed
+- environment-specific assumptions
