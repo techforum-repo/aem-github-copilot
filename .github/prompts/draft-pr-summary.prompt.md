@@ -4,6 +4,8 @@ description: Draft a pull request summary including risks, modules changed, and 
 
 Draft a pull request summary for these changes.
 
+> Tip: attach `#changes` in Copilot Chat to use your current git diff as context automatically.
+
 Include:
 - business or technical purpose
 - modules changed

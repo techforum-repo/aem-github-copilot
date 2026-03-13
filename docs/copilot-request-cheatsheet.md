@@ -15,6 +15,35 @@ You do not need to reference them manually — Copilot applies them based on the
 - Use the cheatsheet requests below as inline chat starting points (`Ctrl+I` / `Cmd+I` in the editor).
 - Replace all `[placeholders]` with actual paths or descriptions before sending.
 
+## Using git context in Copilot Chat
+- `#changes` — attaches your current working tree diff (staged + unstaged) as context
+- `@git` — ask Copilot about commits, history, or branch differences
+- `@git /diff` — explicitly show the current diff
+- Combine with prompts: invoke `/draft-pr-summary` then attach `#changes` for a summary of your actual modifications
+
+---
+
+# GIT - Summarize current changes
+@git what have I changed? Summarize the modified files and their purpose in the context of this AEM repository.
+
+# GIT - Draft PR summary from current diff
+@git #changes Draft a pull request summary for my current changes. Include modules changed, purpose, risks, and Cloud Manager or SonarCloud notes.
+
+# GIT - Explain pipeline impact of current changes
+@git #changes Explain the likely Cloud Manager pipeline, deployment, and runtime impact of my current changes in this AEM repository.
+
+# GIT - Review current changes for AEM issues
+@git #changes Review my current changes for AEM best practices, SonarCloud concerns, Cloud Manager risks, and missing tests.
+
+# GIT - Review current changes for security issues
+@git #changes Review my current changes for service user usage, HTL XSS context, admin resolver usage, and sensitive data exposure.
+
+# GIT - Generate commit message
+@git #changes Suggest a concise and accurate git commit message for these changes.
+
+# GIT - What could break
+@git #changes What existing behavior could break from these changes? Focus on AEM authoring impact, package filters, and downstream dependencies.
+
 ---
 
 # COMPONENT - Explain a component
