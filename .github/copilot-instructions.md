@@ -12,7 +12,6 @@ This repository is an Adobe Experience Manager project with multiple modules for
 - `ui.frontend.react/` contains React-based frontend code integrated with AEM.
 - `ui.frontend.spa/` contains SPA-related frontend code integrated with AEM.
 - `all/` is the package aggregation module.
-- `.cloudmanager/` contains Adobe Cloud Manager and pipeline-related configuration or support files.
 - `devops/` contains deployment, automation, or environment support files.
 - `hooks/` contains local developer workflow or pre-commit related scripts.
 
@@ -61,6 +60,11 @@ This repository is an Adobe Experience Manager project with multiple modules for
 - Avoid heavy logic in presentation layers.
 - Keep code secure, maintainable, and aligned with AEM engineering practices.
 - Mention likely pipeline or code quality risks when relevant.
+
+## Additional guidance
+- Prefer nearby implementations in the same module as the primary pattern source.
+- When working on AEM components, identify related dialog, HTL, Sling Model, clientlib, frontend, and content/config files only when relevant.
+- Prefer the smallest safe implementation that avoids increasing duplication, complexity, or pipeline risk.
 
 ## Output expectations
 When proposing changes:
