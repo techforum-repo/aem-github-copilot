@@ -104,6 +104,8 @@ Current docs include:
 
 This cheatsheet explains how to use prompts and provides ready-to-paste requests for common AEM tasks, code reviews, bug investigations, PR work, and git/repository workflows.
 
+For LSP setup details, current limitations, and the user-level workaround, see `docs\copilot-cli-lsp-setup.md`.
+
 ## How this works in Copilot CLI
 
 Copilot CLI respects:
