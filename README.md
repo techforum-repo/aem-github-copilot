@@ -82,8 +82,9 @@ If you want Java LSP support in Copilot CLI, install Java 21 and `jdtls` locally
 4. Download and extract Eclipse JDT Language Server from the official milestones or snapshots site:
    - `https://download.eclipse.org/jdtls/milestones/`
 5. Place it in a stable location such as `C:\Tools\jdtls`.
-6. Make sure a `jdtls` command is available on `Path`.
-   - You can do this by adding a wrapper script such as `jdtls.cmd`, or by adjusting `.github\lsp.json` to point to your local launcher.
+6. Add the `jdtls` launcher to your system `Path` so the shared `.github\lsp.json` can use it without machine-specific changes.
+   - This is the preferred setup for team use because it keeps the repo configuration portable.
+   - If you cannot add `jdtls` to `Path`, use a user-level Copilot LSP config to point to your exact local launcher path as a fallback.
 7. Start Copilot CLI in the target repository and run:
    ```text
    /lsp
