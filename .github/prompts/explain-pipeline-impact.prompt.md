@@ -4,6 +4,8 @@ description: Explain Cloud Manager pipeline, deployment, and runtime impact of t
 
 Explain the likely pipeline, deployment, and runtime impact of these changes.
 
+> Tip: attach `#changes` in Copilot Chat to use your current git diff as context automatically.
+
 Consider:
 - Cloud Manager implications
 - module and package impact
