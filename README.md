@@ -67,29 +67,14 @@ This does not affect runtime behavior. It improves Copilot CLI's code intelligen
 - diagnostics
 - better symbol understanding across Java and frontend modules
 
-### Java 21 and `jdtls` setup on Windows
-If you want Java LSP support in Copilot CLI, install Java 21 and `jdtls` locally.
+### Copilot CLI LSP setup
 
-1. Install JDK 21:
-   ```powershell
-   winget install EclipseAdoptium.Temurin.21.JDK
-   ```
-2. Open a new terminal and verify Java:
-   ```powershell
-   java -version
-   ```
-3. If the terminal still resolves an older Java version, update `JAVA_HOME` and `Path` to the JDK 21 installation, then open a new terminal again.
-4. Download and extract Eclipse JDT Language Server from the official milestones or snapshots site:
-   - `https://download.eclipse.org/jdtls/milestones/`
-5. Place it in a stable location such as `C:\Tools\jdtls`.
-6. Add the `jdtls` launcher to your system `Path` so the shared `.github\lsp.json` can use it without machine-specific changes.
-   - This is the preferred setup for team use because it keeps the repo configuration portable.
-   - If you cannot add `jdtls` to `Path`, use a user-level Copilot LSP config to point to your exact local launcher path as a fallback.
-7. Start Copilot CLI in the target repository and run:
-   ```text
-   /lsp
-   ```
-8. Test a Java scenario by asking Copilot to explain or trace a class under `core\src\main\java`.
+The repo-level `.github\lsp.json` is the shared intended configuration for this repository.
+
+However, some current Copilot CLI versions may detect repo-level LSP config but still fail to start servers from it. If you see an error such as `Server "java" not found. Available: (none)`, use a user-level Copilot LSP config as the local fallback.
+
+For Windows, Linux, and macOS setup details, see:
+- `docs\copilot-cli-lsp-setup.md`
 
 Expected benefits after setup:
 - better Java symbol understanding
@@ -106,6 +91,7 @@ Supporting documentation for developers using the guidance set.
 
 Current docs include:
 - `docs\copilot-request-cheatsheet.md`
+- `docs\copilot-cli-lsp-setup.md`
 
 This cheatsheet explains how to use prompts and provides ready-to-paste requests for common AEM tasks, code reviews, bug investigations, PR work, and git/repository workflows.
 
@@ -123,6 +109,8 @@ Useful CLI notes:
 - use `/diff`, `/pr`, and `/review` for git and pull request workflows
 
 If you want repo-level LSP support in CLI, install the configured language servers locally so `.github\lsp.json` can be used.
+
+If your CLI version still does not start repo-level servers reliably, use the user-level fallback described in `docs\copilot-cli-lsp-setup.md`.
 
 ## How this works in VS Code
 

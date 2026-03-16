@@ -10,7 +10,8 @@ This repository guidance is designed to work in both GitHub Copilot CLI and GitH
 
 - In Copilot CLI, `.github\copilot-instructions.md` and `.github\instructions\` are applied automatically when the repository is in scope.
 - In VS Code, the same instruction files apply, and prompt files in `.github\prompts\` are easier to discover through the slash-command picker.
-- The request examples in this cheatsheet work in both tools, even when an entry is marked as a freeform example rather than a prompt file.
+- Most freeform request examples in this cheatsheet work in both tools.
+- When an example depends on tool-specific syntax such as `#changes`, it is labeled accordingly.
 
 ### How scoped instructions work
 Files in `.github\instructions\` are applied automatically when the open file matches the `applyTo` pattern. You do not need to reference those instruction files manually.
@@ -23,6 +24,8 @@ Files in `.github\instructions\` are applied automatically when the open file ma
 
 ### When LSP is available, prefer symbol-first requests
 If Copilot CLI has working LSP support for the repo, prefer requests anchored to symbols instead of only file paths.
+
+If repo-level `.github\lsp.json` is detected but `/lsp test` still reports `Available: (none)`, use the user-level workaround documented in `docs\copilot-cli-lsp-setup.md`.
 
 Better anchors include:
 - class names
@@ -37,38 +40,77 @@ Examples:
 - `Show callers of validateAccessToken(...) and explain what could break if I change it.`
 - `Compare SecurePageFilter and TokenIntrospectServlet in the authentication flow.`
 
+### TypeScript LSP examples
+
+These examples are useful once `/lsp test typescript` succeeds.
+
+- `Trace where configureCoveoEngine is defined and used.`
+- `Show callers of useDebounce and explain how SearchBox uses it.`
+- `Trace where GlobalSearchBox is defined, rendered, and tested.`
+- `Trace where GlobalSearchResultList is defined, rendered, and tested.`
+- `Show where getComparePageConfig is defined and how ComparePage uses it.`
+- `Trace where APIHandler is defined and where APIHandler.getInstance() is called.`
+- `Compare configureCoveoEngine usage in PLP-ProductList and ComparePage.`
+- `Explain the dependencies between GlobalSearchBox, useDebounce, and SearchResultList.`
+
 ### How to read the examples below
 - Entries marked with `Prompt file:` correspond directly to a slash prompt in `.github\prompts\`.
 - Entries marked with `Freeform example:` are ready-to-use requests you can paste into chat, even though they are not backed by a prompt file.
 
-## Using git context in Copilot Chat
-- `#changes` — attaches your current working tree diff (staged + unstaged) as context
-- `@git` — ask Copilot about commits, history, or branch differences
-- `@git /diff` — explicitly show the current diff
-- Combine with prompts: invoke `/draft-pr-summary` then attach `#changes` for a summary of your actual modifications
+## Using git context in Copilot
+
+### VS Code Copilot Chat
+- `#changes` attaches your current working tree diff as context.
+- Use `#changes` when you want a prompt grounded in your current local modifications.
+
+### Copilot CLI
+- Use `/diff` to inspect the current diff.
+- Use `/pr` for pull request workflows.
+- For freeform review prompts, run Copilot CLI from the repository root so it can inspect the current worktree.
 
 ---
 
-# GIT - Summarize current changes
-@git what have I changed? Summarize the modified files and their purpose in the context of this AEM repository.
+# GIT - Summarize current changes in VS Code
+#changes Summarize the modified files and their purpose in the context of this AEM repository.
 
-# GIT - Draft PR summary from current diff
-@git #changes Draft a pull request summary for my current changes. Include modules changed, purpose, risks, and Cloud Manager or SonarCloud notes.
+# GIT - Summarize current changes in Copilot CLI
+Summarize my current modified files and their purpose in the context of this AEM repository.
 
-# GIT - Explain pipeline impact of current changes
-@git #changes Explain the likely Cloud Manager pipeline, deployment, and runtime impact of my current changes in this AEM repository.
+# GIT - Draft PR summary in VS Code
+#changes Draft a pull request summary for my current changes. Include modules changed, purpose, risks, and Cloud Manager or SonarCloud notes.
 
-# GIT - Review current changes for AEM issues
-@git #changes Review my current changes for AEM best practices, SonarCloud concerns, Cloud Manager risks, and missing tests.
+# GIT - Draft PR summary in Copilot CLI
+Draft a pull request summary for my current changes. Include modules changed, purpose, risks, and Cloud Manager or SonarCloud notes.
 
-# GIT - Review current changes for security issues
-@git #changes Review my current changes for service user usage, HTL XSS context, admin resolver usage, and sensitive data exposure.
+# GIT - Explain pipeline impact in VS Code
+#changes Explain the likely Cloud Manager pipeline, deployment, and runtime impact of my current changes in this AEM repository.
 
-# GIT - Generate commit message
-@git #changes Suggest a concise and accurate git commit message for these changes.
+# GIT - Explain pipeline impact in Copilot CLI
+Explain the likely Cloud Manager pipeline, deployment, and runtime impact of my current changes in this AEM repository.
 
-# GIT - What could break
-@git #changes What existing behavior could break from these changes? Focus on AEM authoring impact, package filters, and downstream dependencies.
+# GIT - Review current changes for AEM issues in VS Code
+#changes Review my current changes for AEM best practices, SonarCloud concerns, Cloud Manager risks, and missing tests.
+
+# GIT - Review current changes for AEM issues in Copilot CLI
+Review my current changes for AEM best practices, SonarCloud concerns, Cloud Manager risks, and missing tests.
+
+# GIT - Review current changes for security issues in VS Code
+#changes Review my current changes for service user usage, HTL XSS context, admin resolver usage, and sensitive data exposure.
+
+# GIT - Review current changes for security issues in Copilot CLI
+Review my current changes for service user usage, HTL XSS context, admin resolver usage, and sensitive data exposure.
+
+# GIT - Generate commit message in VS Code
+#changes Suggest a concise and accurate git commit message for these changes.
+
+# GIT - Generate commit message in Copilot CLI
+Suggest a concise and accurate git commit message for my current changes.
+
+# GIT - What could break in VS Code
+#changes What existing behavior could break from these changes? Focus on AEM authoring impact, package filters, and downstream dependencies.
+
+# GIT - What could break in Copilot CLI
+What existing behavior could break from my current changes? Focus on AEM authoring impact, package filters, and downstream dependencies.
 
 ---
 
