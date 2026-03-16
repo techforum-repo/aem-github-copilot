@@ -13,6 +13,15 @@ The repository provides:
 - practical request examples
 - optional repo-level LSP configuration for Copilot CLI
 
+## Quick start
+
+To start using this guidance in another repository:
+
+1. Copy the `.github` folder from this repo into the root of your target repository.
+2. Review the prompt files, scoped instructions, and `copilot-instructions.md` to make sure they match your module structure and conventions.
+3. Optionally copy the `docs` folder as well if you want the request cheatsheet and setup notes in the target repo.
+4. If you use Copilot CLI with LSP, install the required language servers and verify them with `/lsp`.
+
 ## Repository structure
 
 ### `.github\copilot-instructions.md`
