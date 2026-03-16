@@ -9,8 +9,10 @@ Before generating code, first provide:
 2. the AEM integration points involved, such as component markup, `ui.apps` clientlibs, model JSON, or authored content
 3. any assumptions about backend data, Sling Models, or servlet endpoints
 4. likely risks across authoring, rendering, build, or deployment
+5. a module decision checklist covering ownership, build/pipeline impact, runtime integration point, and authoring impact
 
 Requirements:
+- if module choice or integration contract is unclear, ask one focused clarifying question before implementing
 - follow the conventions of the specific frontend module or `ui.apps` clientlib area being edited
 - preserve existing integration with AEM markup, authored content, and clientlibs
 - keep contracts between frontend code and AEM components explicit

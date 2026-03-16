@@ -12,6 +12,7 @@ Before generating code, first provide:
 5. key assumptions and likely SonarCloud or Cloud Manager risks
 
 Requirements:
+- if selectors, extensions, methods, registration style, or authentication model are unclear, ask one focused clarifying question before implementing
 - prefer `@SlingServletResourceTypes` over path-based registration unless path registration is already the established pattern here
 - use `SlingSafeMethodsServlet` for read-only use cases and `SlingAllMethodsServlet` only when write methods are required
 - keep request handling focused and delegate business logic to OSGi services

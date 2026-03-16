@@ -7,6 +7,11 @@ applyTo: "core/src/main/**/*.java"
 ## Scope
 Use this guidance for Sling Models, OSGi services, servlets, filters, schedulers, workflow steps, and related Java classes in the `core` module.
 
+## Instruction precedence
+- Treat this file as the baseline for all `core/src/main/**/*.java` changes.
+- Apply `core-java-security.instructions.md` and `core-java-performance.instructions.md` as additional mandatory overlays for the same files.
+- If guidance overlaps, follow the strictest rule and call out any unavoidable trade-off explicitly.
+
 ## Key rules
 - Prefer Sling Models for component-backed presentation logic and OSGi services for shared or reusable business logic.
 - Follow existing package structure, annotation style, injection patterns, and naming conventions used by nearby classes.

@@ -9,7 +9,7 @@ Use this guidance for Dispatcher configuration that affects security, caching, a
 
 ## Key rules
 - `/filter` should default deny; allow only explicitly required paths.
-- Block or tightly restrict sensitive AEM endpoints such as `/crx`, `/system`, `/bin/wcmcommand`, `/bin/receive`, `/etc/replication`, `/mnt/overlay`, `/cf#`, and `/editor.html`.
+- Block or tightly restrict sensitive AEM endpoints such as `/crx`, `/system`, `/bin/wcmcommand`, `/bin/receive`, `/etc/replication`, `/mnt/overlay`, `/editor.html`, and Content Fragment authoring/editor routes (for example `/assets.html` and `/mnt/overlay/dam/cfm`).
 - Restrict `.json` and especially `.infinity.json` exposure unless a specific public use case exists.
 - Ensure required security headers are present where the repository manages them.
 - Never cache authenticated, personalized, or user-specific responses.
