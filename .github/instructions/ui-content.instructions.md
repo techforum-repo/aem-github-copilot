@@ -2,18 +2,20 @@
 applyTo: "ui.content/**/*.xml"
 ---
 
-# Instructions for ui.content
+# Instructions for `ui.content`
 
-## OakPAL rules
-- `ui.content` is mutable — no `/apps` or `/libs` paths.
-- No `rep:policy` nodes unless explicitly reviewed.
-- No `authorizable` nodes (users, groups).
-- No `/oak:index`, `/home`, or `/libs` in filter roots.
-- Filter roots must not overlap with other packages in `all`.
-- Non-default filter modes (`merge`, `replace`) affect existing content on install — flag for review.
+## Scope
+Use this guidance for mutable content, templates, policies, experience fragments, and other content/package XML under `ui.content`.
+
+## Key rules
+- Keep `ui.content` limited to mutable content and configuration that belongs with content ownership.
+- Do not place immutable application paths such as `/apps` or `/libs` here.
+- Avoid `rep:policy`, `authorizable`, `/oak:index`, `/home`, or `/libs` content unless explicitly required and reviewed.
+- Review non-default filter modes such as `merge` or `replace` carefully because they can alter existing authored content during install.
+- Avoid overlapping filter roots with other embedded packages in `all`.
 
 ## Review focus
-- mutable vs immutable path separation
-- rep:policy or authorizable nodes
-- filter mode changes
-- impact on existing authored content
+- mutable versus immutable path separation
+- ACL or authorizable content in packages
+- filter mode changes with upgrade risk
+- unintended impact on existing authored content

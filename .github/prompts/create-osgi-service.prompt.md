@@ -4,14 +4,22 @@ description: Create or update an OSGi service following repository conventions
 
 Create or update an OSGi service following repository conventions.
 
-Requirements:
-- follow existing service and package conventions
-- keep responsibilities focused
-- avoid introducing unnecessary abstractions
-- explain how the service will be used by Sling Models, servlets, or schedulers if relevant
-- suggest tests for core behavior
+Before generating code, first provide:
+1. the likely interface and implementation location
+2. the expected consumers, such as Sling Models, servlets, schedulers, or workflow steps
+3. dependencies, collaborators, and any configuration requirements
+4. key assumptions, risks, and test considerations
 
-Before generating code:
-1. identify likely interface and implementation location
-2. list dependencies or collaborators
-3. mention risks or assumptions
+Requirements:
+- follow existing package, annotation, and service patterns already used in this repository
+- keep responsibilities focused and avoid unnecessary abstractions
+- make configuration explicit when behavior should vary by environment or site
+- avoid repository access inside the service unless it is clearly needed; if needed, call out service user requirements
+- keep thread-safety and null-handling explicit
+- explain how the service will be used by other AEM layers
+- suggest tests for core behavior and failure paths
+
+Output format:
+1. design summary
+2. code changes
+3. validation steps

@@ -2,14 +2,19 @@
 applyTo: "devops/**/*"
 ---
 
-# Instructions for devops
+# Instructions for `devops`
 
-## Cloud Manager awareness
-- Pipeline and quality gate changes affect all environments — treat as deployment-critical.
-- Environment variable additions must be coordinated with Cloud Manager environment setup.
-- Dispatcher config changes must be validated with the Dispatcher SDK locally before pushing.
+## Scope
+Changes in `devops` can affect build pipelines, deployment behavior, and environment assumptions across all environments.
+
+## Key rules
+- Treat pipeline and quality gate changes as deployment-critical.
+- Call out required environment variables, secrets, or external configuration changes explicitly.
+- Validate dispatcher-related changes with the Dispatcher SDK before merge when applicable.
+- Avoid environment-specific assumptions that are not documented in the deployment flow.
 
 ## Review focus
-- deployment safety and rollback considerations
-- Cloud Manager pipeline impact
-- environment-specific assumptions
+- pipeline impact
+- rollback or release risk
+- undocumented environment dependencies
+- deployment safety across environments

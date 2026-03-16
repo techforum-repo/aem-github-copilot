@@ -2,20 +2,21 @@
 applyTo: "ui.config/**/*.xml"
 ---
 
-# Instructions for ui.config
+# Instructions for `ui.config`
 
-## OSGi configuration rules
-- OSGi configs belong here — not in `ui.apps` (OakPAL violation if placed there).
-- Use correct runmode folder names: `config`, `config.author`, `config.publish`, `config.dev`, `config.stage`, `config.prod`. Other names are silently ignored in AEMaaCS.
-- Config file names must match the OSGi PID exactly, including factory PID format: `com.example.Service~identifier.xml`.
-- Do not hardcode secrets or tokens in config values — use Cloud Manager secret environment variables.
+## Scope
+Use this guidance for OSGi configurations, service user mappings, and Repoinit scripts in `ui.config`.
 
-## Repoinit
-- Service user creation and ACL setup belong here as Repoinit scripts.
-- Grant only minimum required privileges for each service user.
+## Key rules
+- Place OSGi configs here, not in `ui.apps`.
+- Use valid AEM runmode folder names such as `config`, `config.author`, `config.publish`, `config.dev`, `config.stage`, and `config.prod`.
+- Ensure config file names match the OSGi PID exactly, including factory PID `~identifier` naming.
+- Do not hardcode secrets, tokens, or environment-specific confidential values.
+- Keep service user mappings and Repoinit here, with least-privilege access design.
 
 ## Review focus
-- configs placed here vs incorrectly placed in ui.apps
-- runmode folder name correctness
-- OSGi PID / filename match
+- incorrect module placement for config files
+- invalid runmode folder names
+- PID and filename mismatch
 - hardcoded secrets
+- overly broad service user permissions

@@ -2,6 +2,17 @@
 applyTo: "hooks/**/*"
 ---
 
-# Instructions for hooks
+# Instructions for `hooks`
 
-- These are local developer workflow scripts — keep behavior predictable and explain any change that affects the commit or validation flow.
+## Scope
+These scripts affect local developer workflow, commit behavior, and local validation flow.
+
+## Key rules
+- Keep behavior predictable and easy to explain.
+- Call out any change that affects commit, push, validation, or local setup flow.
+- Avoid surprising side effects or destructive behavior in local workflow scripts.
+
+## Review focus
+- unexpected workflow changes
+- fragile local assumptions
+- developer experience regressions

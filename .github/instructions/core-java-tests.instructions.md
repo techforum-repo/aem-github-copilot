@@ -2,20 +2,22 @@
 applyTo: "core/src/test/**/*.java"
 ---
 
-# Instructions for Java test files in core
-
-## Framework
-- Use `AemContext` for Sling Model and component tests.
-- Use `@ExtendWith(MockitoExtension.class)` for service or utility tests with no AEM context needed.
-- Follow the test class structure and naming conventions used in nearby test files.
+# Instructions for Java test files in `core`
 
 ## Scope
-- Test actual behavior — not just mock setup.
-- Cover null inputs, edge cases, and primary behavior paths.
-- Keep each test focused on one behavior.
+Use this guidance for unit tests covering Sling Models, OSGi services, utilities, and other Java behavior in the `core` module.
+
+## Key rules
+- Follow the test framework and class structure already used in nearby tests.
+- Use `AemContext` for Sling Model tests and component-backed behavior.
+- Use `@ExtendWith(MockitoExtension.class)` when no AEM context is required.
+- Test meaningful behavior, not only mock wiring.
+- Cover primary paths, null handling, and meaningful edge cases.
+- Keep each test focused on one behavior with clear assertions.
 
 ## Review focus
-- missing null and edge case coverage
-- tests that only pass due to mock setup
+- tests that only prove mock setup
 - missing assertions
-- AemContext misuse
+- missing null or edge-case coverage
+- unnecessary `AemContext` usage
+- brittle tests that over-mock simple collaborators

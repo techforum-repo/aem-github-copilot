@@ -6,10 +6,20 @@ Explain the likely pipeline, deployment, and runtime impact of these changes.
 
 Consider:
 - Cloud Manager implications
-- package or module impact
+- module and package impact
 - frontend build impact
-- config deployment impact
-- authored content impact
-- rollback or release risk
+- OSGi config deployment impact
+- authored content or template impact
+- dispatcher, caching, or release risk if relevant
+- rollback considerations
 
-Keep the explanation concise but specific to this repository.
+Requirements:
+- keep the explanation specific to this repository's module layout and packaging model
+- separate build-time impact from runtime impact
+- distinguish confirmed impacts from likely or conditional impacts
+
+Output format:
+1. pipeline impact
+2. deployment impact
+3. runtime impact
+4. risk notes

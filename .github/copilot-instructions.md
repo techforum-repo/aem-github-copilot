@@ -1,34 +1,32 @@
 # GitHub Copilot Instructions for This Repository
 
-This is an Adobe Experience Manager as a Cloud Service (AEMaaCS) project.
+This repository contains an Adobe Experience Manager as a Cloud Service (AEMaaCS) project. Apply AEM package boundaries, Cloud Manager safety rules, and existing module conventions before suggesting or generating changes.
 
 ## Module structure
-- `core/` — Sling Models, OSGi services, servlets, schedulers, business logic
-- `ui.apps/` — AEM components, dialogs, HTL, clientlibs (immutable package — no `/content` paths)
-- `ui.apps.structure/` — repository structure definitions
-- `ui.content/` — mutable content (no `/apps` or `/libs` paths)
-- `ui.config/` — OSGi configurations and Repoinit scripts (not in `ui.apps`)
-- `ui.frontend/`, `ui.frontend.react/`, `ui.frontend.spa/` — frontend modules (do not mix patterns across them)
-- `all/` — aggregation package
-- `devops/` — deployment and environment support
+- `core/` — Sling Models, OSGi services, servlets, schedulers, workflow steps, and shared Java logic
+- `ui.apps/` — AEM components, dialogs, HTL, clientlibs, and immutable `/apps` content
+- `ui.apps.structure/` — repository structure definitions that must install before `ui.apps`
+- `ui.content/` — mutable content, editable templates, policies, and experience/content structure
+- `ui.config/` — OSGi configurations, service user mappings, and Repoinit scripts
+- `ui.frontend/`, `ui.frontend.react/`, `ui.frontend.spa/` — distinct frontend modules with different integration patterns
+- `all/` — aggregation package that embeds deployable modules
+- `devops/` — deployment, environment, and pipeline-related assets
 - `hooks/` — local developer workflow scripts
 
-## Key rules for this project
-- Sling Models for component logic — keep business logic out of HTL
-- OSGi services for shared or reusable logic
-- All JCR access must use a service user — never admin `ResourceResolver` or `loginAdministrative`
-- `ResourceResolver` must always be closed with try-with-resources (CQBP-72)
-- OSGi configs belong in `ui.config`, not `ui.apps` (OakPAL)
-- No `Thread.sleep()` in Servlets, Jobs, or Schedulers (CQBP-75)
-- SLF4J only — no `System.out` or `System.err` (CQBP-84)
-- All JCR queries must be backed by an Oak index
+## Core rules for this repository
+- Prefer Sling Models for component-backed presentation logic and OSGi services for reusable business logic.
+- Keep business logic out of HTL.
+- Place OSGi configuration and Repoinit in `ui.config`, not `ui.apps`.
+- Keep `ui.apps` immutable and keep mutable content in `ui.content`.
+- Use service users for repository access; never use admin `ResourceResolver` or `loginAdministrative`.
+- Always close `ResourceResolver` and `Session` objects correctly.
+- Never call `Thread.sleep()` in servlets, jobs, schedulers, or workflow steps.
+- Use SLF4J parameterized logging only; do not use `System.out`, `System.err`, or string concatenation in log calls.
+- Ensure JCR queries are indexed, bounded, and not executed in tight rendering loops.
+- Follow existing patterns in the same module before introducing new abstractions or structures.
 
-## Conventions
-- Follow patterns already used in the same module — do not introduce new patterns unless asked
-- Do not modify package filters, build config, or generated files unless explicitly requested
-- Keep changes minimal and scoped
-
-## Output
-- Explain assumptions briefly for non-trivial changes
-- Mention Cloud Manager or SonarCloud risks when relevant
-- Suggest tests when logic is added or changed
+## Change guidance
+- Keep changes minimal, scoped, and aligned with the owning module.
+- Call out assumptions for non-trivial work.
+- Mention Cloud Manager, OakPAL, Dispatcher, or SonarCloud risks when they are relevant.
+- Suggest validation steps or tests when logic, rendering, configuration, or packaging changes.

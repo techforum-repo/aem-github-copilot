@@ -2,16 +2,20 @@
 applyTo: "all/**/*.xml"
 ---
 
-# Instructions for the all module
+# Instructions for the `all` module
 
-## OakPAL and deployment rules
-- Embedding order matters: `ui.apps.structure` → `ui.apps` → `ui.content` and `ui.config`. Wrong order breaks installation.
-- Filter roots across all embedded packages must not overlap — causes OakPAL violations and unpredictable installs.
-- Do not add or remove embeds unless explicitly requested — a missing embed means that module is not deployed.
-- Do not add content filters directly in `all` for paths owned by a sub-package.
+## Scope
+The `all` module is the aggregation package. Changes here affect packaging, installation order, and deployment safety across the whole AEM application.
+
+## Key rules
+- Preserve the correct embed order: `ui.apps.structure` -> `ui.apps` -> `ui.content` and `ui.config`.
+- Do not add or remove embedded packages unless the change explicitly requires it.
+- Do not add filter roots in `all` for paths already owned by embedded sub-packages.
+- Avoid overlapping filter roots across embedded packages; these cause OakPAL violations and unpredictable installs.
+- Review any filter or embed change for content deletion risk during install or upgrade.
 
 ## Review focus
-- embedding order correctness
-- overlapping filter roots across packages
-- missing embeds after module additions
-- filter paths that could delete content on install
+- embed order correctness
+- missing embeds after adding a module
+- overlapping filter roots
+- filter changes that could delete or overwrite existing content unexpectedly

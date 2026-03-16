@@ -2,24 +2,26 @@
 applyTo: "ui.apps/**/*.{html,xml,js,css,scss}"
 ---
 
-# Instructions for ui.apps
+# Instructions for `ui.apps`
 
-## HTL security — output context
-- Never use `${var @ context='unsafe'}` — disables all escaping, flag for security review.
-- Use `${var @ context='uri'}` for all href, src, and action values.
-- Use `${var @ context='html'}` only for trusted, pre-sanitized HTML — never for user input.
-- Use `${var @ context='scriptString'}` when embedding values inside `<script>` blocks.
+## Scope
+Use this guidance for AEM components, dialogs, HTL, clientlib definitions, and other immutable application content under `ui.apps`.
 
-## HTL
-- Keep business logic out of HTL — use Sling Models for computed values.
-- Preserve placeholders and edit mode behavior.
+## Key rules
+- Keep business logic out of HTL; use Sling Models or services for computed values.
+- Preserve placeholders, edit mode behavior, and authoring usability.
+- Maintain backward compatibility in dialogs where possible; renamed or removed fields can break existing authored content.
+- Use HTL output contexts correctly:
+  - never use `${var @ context='unsafe'}`
+  - use `context='uri'` for URLs and actions
+  - use `context='html'` only for trusted, sanitized HTML
+  - use `context='scriptString'` inside script blocks
+- Keep `ui.apps` immutable: no `/content` paths, no mutable editable-template content under `/conf`, and no OSGi configs here.
+- Avoid `rep:policy` or `authorizable` nodes unless explicitly reviewed.
 
-## Dialogs
-- Preserve backward compatibility — renaming or removing fields breaks existing authored content.
-
-## OakPAL rules
-- `ui.apps` is immutable — no `/content` paths, no mutable `/conf` editable template content.
-- No OSGi configuration XML here — belongs in `ui.config`.
-- No `rep:policy` nodes unless explicitly reviewed.
-- No `authorizable` nodes.
-- Filter roots must not overlap with other packages in `all`.
+## Review focus
+- business logic leaking into HTL
+- broken authoring behavior or placeholders
+- backward-incompatible dialog changes
+- incorrect HTL output context usage
+- mutable content or OSGi config placed in `ui.apps`

@@ -1,26 +1,26 @@
 ---
-applyTo: "core/**/*.java"
+applyTo: "core/src/main/**/*.java"
 ---
 
-# Security instructions for Java files in core
+# Security instructions for Java files in `core`
 
-## Service users
-- Never use admin `ResourceResolver` — use `resourceResolverFactory.getServiceResourceResolver(Map.of(ResourceResolverFactory.SUBSERVICE, "<name>"))`.
-- Service user mappings live in `ui.config` as `org.apache.sling.serviceusermapping.impl.ServiceUserMapperImpl.amended~<name>.xml`.
-- Service users and ACLs are provisioned via Repoinit in `ui.config` — not in Java code.
+## Scope
+Apply these rules to servlets, filters, services, workflow steps, schedulers, and any Java code that handles repository access or request input.
 
-## Input and query safety
-- Never concatenate user input into JCR-SQL2, XPath, or LDAP queries — use parameterized queries or `QueryBuilder`.
-- Validate path parameters against an expected prefix before passing to `resourceResolver.getResource()`.
-- Do not expose stack traces, JCR paths, or internal error details in HTTP responses.
-
-## Servlet registration
-- Prefer resource type registration over path-based registration.
-- Path-based servlets (`/bin/...`) are publicly reachable — ensure Dispatcher filter rules protect them.
+## Key rules
+- Use `resourceResolverFactory.getServiceResourceResolver(...)` with a named subservice when repository access is required.
+- Keep service user mappings and ACL provisioning in `ui.config`; do not attempt to create them in Java code.
+- Never concatenate untrusted input into JCR-SQL2, XPath, LDAP, or similar query strings.
+- Validate path-based input before passing it to repository lookup APIs.
+- Do not expose stack traces, internal repository paths, or sensitive details in responses or logs.
+- Prefer resource type servlet registration over path-based registration unless an existing repository pattern requires otherwise.
+- Treat path-based servlets as publicly reachable and ensure access control and dispatcher filtering are considered.
+- Flag hardcoded credentials, tokens, or secrets immediately.
 
 ## Review focus
-- admin ResourceResolver or Session usage
-- user input in queries or paths
-- path-based servlet registration without access control
-- sensitive data in logs or responses
-- hardcoded credentials (java:S2068)
+- unsafe resolver or subservice usage
+- query construction from user input
+- unvalidated path input
+- path-based servlet exposure
+- sensitive data leakage in logs or responses
+- hardcoded secrets or credentials

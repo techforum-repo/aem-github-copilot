@@ -1,22 +1,24 @@
 ---
-applyTo: "core/**/*.java"
+applyTo: "core/src/main/**/*.java"
 ---
 
-# Performance instructions for Java files in core
+# Performance instructions for Java files in `core`
 
-## JCR queries
-- All queries must be backed by an Oak index — validate with the Query Debugger before committing.
-- Always set a query limit to prevent unbounded result sets.
-- Never run queries inside loops.
-- Never traverse large node trees with `listChildren()` — use a targeted query with pagination instead.
+## Scope
+Apply these rules when reviewing or generating Java code that reads the repository, renders page data, or runs in request or background execution paths.
 
-## Sling Model rendering performance
-- Do not run JCR queries or heavy resource traversals in `@PostConstruct` methods — this blocks every page render.
-- Use lazy initialization for data that may not always be needed.
-- OSGi services are singletons — never store request or session state in service instance fields.
+## Key rules
+- Ensure every JCR query is backed by an Oak index and has an explicit limit when appropriate.
+- Do not execute queries inside loops.
+- Avoid broad tree traversal when a targeted query or direct lookup is more appropriate.
+- Do not run expensive queries or resource traversal inside `@PostConstruct` for frequently rendered Sling Models.
+- Prefer lazy initialization when data may not always be needed.
+- Do not store request, resolver, or session state in OSGi service instance fields.
+- Keep resolver and session lifetime as short as possible.
 
 ## Review focus
-- queries without an index or without a limit
-- queries inside loops or in @PostConstruct
-- ResourceResolver or Session held longer than the immediate operation
-- request state stored in OSGi service fields
+- unbounded or non-indexed queries
+- query execution inside loops
+- heavy work in `@PostConstruct`
+- long-lived resolver or session usage
+- request-scoped state stored in singleton services

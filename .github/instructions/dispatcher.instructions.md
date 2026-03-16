@@ -4,24 +4,22 @@ applyTo: "devops/**/*.{conf,any,vhost,farm}"
 
 # Instructions for Dispatcher configuration
 
-## Security
-- `/filter` must default-deny — allow only explicitly needed paths.
-- Block: `/crx`, `/system`, `/bin/wcmcommand`, `/bin/receive`, `/etc/replication`, `/mnt/overlay`, `/cf#`, `/editor.html`.
-- Restrict or block `.json` and `.infinity.json` to prevent data exposure.
-- Required response headers: `X-Frame-Options`, `X-Content-Type-Options: nosniff`, `Strict-Transport-Security`, `Content-Security-Policy`.
+## Scope
+Use this guidance for Dispatcher configuration that affects security, caching, and Cloud Manager compatibility.
 
-## Caching
-- Never cache authenticated or user-specific responses.
-- Use `/ignoreUrlParams` to prevent cache fragmentation from analytics query params.
-- Cache invalidation paths must match what publish replication actually flushes.
-
-## AEMaaCS Dispatcher
-- Validate config with the Dispatcher SDK locally before pushing — config errors fail the Cloud Manager pipeline.
-- Do not use Dispatcher directives not supported by the AEMaaCS Dispatcher SDK.
+## Key rules
+- `/filter` should default deny; allow only explicitly required paths.
+- Block or tightly restrict sensitive AEM endpoints such as `/crx`, `/system`, `/bin/wcmcommand`, `/bin/receive`, `/etc/replication`, `/mnt/overlay`, `/cf#`, and `/editor.html`.
+- Restrict `.json` and especially `.infinity.json` exposure unless a specific public use case exists.
+- Ensure required security headers are present where the repository manages them.
+- Never cache authenticated, personalized, or user-specific responses.
+- Use `/ignoreUrlParams` to avoid unnecessary cache fragmentation from analytics-style query parameters.
+- Keep cache invalidation rules aligned with actual publish flush behavior.
+- Use only Dispatcher directives supported by the AEMaaCS Dispatcher SDK.
 
 ## Review focus
-- default-deny filter rule present
-- sensitive AEM paths blocked
-- security response headers present
-- authenticated content not cached
-- Cloud Manager Dispatcher SDK compatibility
+- default-deny filter posture
+- exposure of sensitive endpoints or JSON data
+- security header coverage
+- caching of authenticated or personalized content
+- Dispatcher SDK and Cloud Manager compatibility
