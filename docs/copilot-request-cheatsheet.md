@@ -48,8 +48,17 @@ When LSP is configured and working, Copilot can answer symbol-first requests mor
 - In VS Code, use `#changes` when you want the current diff included.
 - In Copilot CLI, run from the repository root so the agent can inspect the full worktree.
 
-### When LSP is available, prefer symbol-first requests
-If Copilot CLI has working LSP support for the repo, prefer requests anchored to symbols instead of only file paths.
+### When LSP is available, use LSP-first symbol tracing
+If Copilot CLI has working LSP support for the repo, request LSP-first tracing for symbols instead of path-only tracing.
+
+For trace requests, ask for:
+- definition
+- references (callers/usages)
+- implementations (when applicable)
+- file and line locations for each result
+
+Fallback rule:
+- if LSP is unavailable or returns no results, fall back to text search and explicitly state the fallback reason in the response.
 
 If repo-level `.github\lsp.json` is detected but `/lsp test` still reports `Available: (none)`, use the user-level workaround documented in `docs\copilot-cli-lsp-setup.md`.
 
@@ -59,6 +68,9 @@ Better anchors include:
 - method names
 - fields or constants
 - callers, implementors, and dependencies
+
+Copy/paste template:
+- `Use LSP first to trace symbol [SymbolName]. Show definition, references, and implementations with file/line links. If LSP fails, state why and then use text search.`
 
 Examples:
 - `Trace where JWTAuthenticationService is implemented and used in this repository.`

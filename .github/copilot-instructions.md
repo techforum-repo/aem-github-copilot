@@ -30,3 +30,10 @@ This repository contains an Adobe Experience Manager as a Cloud Service (AEMaaCS
 - Call out assumptions for non-trivial work.
 - Mention Cloud Manager, OakPAL, Dispatcher, or SonarCloud risks when they are relevant.
 - Suggest validation steps or tests when logic, rendering, configuration, or packaging changes.
+
+## Code tracing guidance
+- For definition, reference, implementation, and rename requests, always run LSP symbol tracing first when LSP is available.
+- For trace-focused requests, do not start with plain text search when LSP is available.
+- Return symbol results with file and line locations.
+- Fall back to text search only when LSP is unavailable, unsupported for the language, or returns no results, and explicitly state the fallback reason.
+- Unless the user asks otherwise, treat symbol tracing requests as LSP-first by default.
