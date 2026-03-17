@@ -2,25 +2,51 @@
 
 ## How to use this file
 
-### Invoke prompts in Copilot Chat
-Open GitHub Copilot Chat in VS Code, type `/`, and select a prompt from `.github\prompts\`.
+### Default workflow: use freeform requests first
+The primary workflow for this repository is to ask for work in natural language and let Copilot apply the repository instructions automatically.
 
-### Copilot CLI and VS Code compatibility
-This repository guidance is designed to work in both GitHub Copilot CLI and GitHub Copilot Chat in VS Code.
+Use freeform requests first unless you specifically want a reusable prompt template.
 
-- In Copilot CLI, `.github\copilot-instructions.md` and `.github\instructions\` are applied automatically when the repository is in scope.
-- In VS Code, the same instruction files apply, and prompt files in `.github\prompts\` are easier to discover through the slash-command picker.
-- Most freeform request examples in this cheatsheet work in both tools.
+### How prompts fit in VS Code and Copilot CLI
+Prompt files in `.github\prompts\` are available, but they are optional and are not applied automatically.
+
+- In VS Code, prompt files are a convenience feature. Open GitHub Copilot Chat, type `/`, and select a prompt if you want a reusable starting template.
+- In Copilot CLI, repository instructions are applied automatically, but prompt files are not the normal primary workflow. Prefer direct freeform requests unless you intentionally want to mirror a saved prompt.
+- In both tools, most examples in this cheatsheet can be pasted directly as freeform requests without using a prompt file.
 - When an example depends on tool-specific syntax such as `#changes`, it is labeled accordingly.
 
-### How scoped instructions work
-Files in `.github\instructions\` are applied automatically when the open file matches the `applyTo` pattern. You do not need to reference those instruction files manually.
+### How to use prompt templates
+Use a prompt template when you want a reusable structure for repeatable work such as reviews, PR summaries, bug investigation, or component scaffolding.
+
+#### In VS Code
+- Open GitHub Copilot Chat.
+- Type `/` and select a prompt from `.github\prompts\`.
+- Replace placeholders such as `[file path]` or `[brief description]`.
+- Add files, folders, or `#changes` context if needed before sending.
+
+#### In Copilot CLI
+- Prompt files in `.github\prompts\` are not exposed as direct slash commands.
+- Open the matching `.prompt.md` file, copy the request body, replace placeholders, and paste it as a normal request.
+- Prefer freeform requests when you do not need the structure of a saved template.
+
+#### When to choose a prompt template instead of freeform
+- when onboarding teammates who need examples
+- when you want consistent wording across repeated review tasks
+- when the prompt already captures a good checklist for the task
+
+### How automatic instructions work
+`.github\copilot-instructions.md` and matching files in `.github\instructions\` are applied automatically when the repository and relevant files are in scope. You do not need to mention those instruction files in your request.
+
+### How LSP fits in
+When LSP is configured and working, Copilot can answer symbol-first requests more reliably. That improves tasks such as tracing implementations, callers, dependencies, and cross-file usage.
 
 ### Tips for better results
-- Attach the relevant file or folder as context whenever possible.
-- For multi-file work, list the exact files after the prompt.
+- Attach the relevant file, folder, or diff context whenever possible.
+- For multi-file work, list the exact files after the request.
 - Replace every `[placeholder]` before sending the request.
-- Prefer concrete paths and clear change descriptions over generic wording.
+- Prefer concrete paths, symbols, and clear change descriptions over generic wording.
+- In VS Code, use `#changes` when you want the current diff included.
+- In Copilot CLI, run from the repository root so the agent can inspect the full worktree.
 
 ### When LSP is available, prefer symbol-first requests
 If Copilot CLI has working LSP support for the repo, prefer requests anchored to symbols instead of only file paths.
@@ -54,8 +80,9 @@ These examples are useful once `/lsp test typescript` succeeds.
 - `Explain the dependencies between GlobalSearchBox, useDebounce, and SearchResultList.`
 
 ### How to read the examples below
-- Entries marked with `Prompt file:` correspond directly to a slash prompt in `.github\prompts\`.
-- Entries marked with `Freeform example:` are ready-to-use requests you can paste into chat, even though they are not backed by a prompt file.
+- Entries marked with `Prompt file:` correspond to an optional reusable prompt in `.github\prompts\`. Use them only if you want that template.
+- Entries marked with `Freeform example:` are ready-to-use requests you can paste directly into VS Code Copilot Chat or Copilot CLI.
+- If a freeform example already does what you need, you do not need to invoke a prompt file.
 
 ## Using git context in Copilot
 
