@@ -2,6 +2,8 @@
 description: Investigate a bug across AEM modules with root cause and fix suggestions
 ---
 
+> Tip: attach `#file:<path>` for the suspected file, or paste a log snippet for context.
+
 Help investigate this bug in the context of this AEM repository.
 
 Approach:

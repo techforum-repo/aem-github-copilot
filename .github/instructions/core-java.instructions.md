@@ -28,6 +28,15 @@ If the implementation extends a WCM Core Component, use the delegation pattern:
 - override only the behavior that differs
 - do not reimplement inherited logic unnecessarily
 
+## OSGi event handlers
+
+Use `EventHandler` for reacting to repository or OSGi framework events:
+- Register with `@Component(service = EventHandler.class)` and specify the topic filter via the `event.topics` component property (e.g. `property = { EventConstants.EVENT_TOPIC + "=..." }`).
+- Keep handler execution fast — offload slow work to a `JobManager` job; never block the event thread.
+- Use `JobConsumer` with `JobManager.addJob()` instead of `EventHandler` when work must be reliable, retryable, or distributed across cluster nodes.
+- Never use `EventHandler` for content replication — use `ReplicationContentFilter` or a workflow step instead.
+- `@Deactivate` must cancel any pending async work started by the handler.
+
 ## Review focus
 - unsafe resolver or session usage
 - missing cleanup for `ResourceResolver` or `Session`

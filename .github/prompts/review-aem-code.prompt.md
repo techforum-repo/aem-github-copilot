@@ -2,6 +2,8 @@
 description: Review selected files for AEM best practices, SonarCloud, and Cloud Manager concerns
 ---
 
+> Tip: attach `#file:<path>` or select files in the editor before invoking to give Copilot the right context.
+
 Review the selected files for:
 - AEM best practices
 - SonarCloud-style code quality concerns

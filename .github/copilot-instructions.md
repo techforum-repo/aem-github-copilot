@@ -37,6 +37,14 @@ This project targets **Java 21**. Use Java 21 language features when they improv
 - Ensure JCR queries are indexed, bounded, and not executed in tight rendering loops.
 - Follow existing patterns in the same module before introducing new abstractions or structures.
 
+## Build commands
+
+- Full build: `mvn clean install`
+- Deploy to author: `mvn clean install -PautoInstallPackage -Daem.host=localhost -Daem.port=4502`
+- Build without tests: `mvn clean install -DskipTests`
+- Run tests only: `mvn test`
+- Format code: `mvn spotless:apply`
+
 ## Change guidance
 - Keep changes minimal, scoped, and aligned with the owning module.
 - Call out assumptions for non-trivial work.

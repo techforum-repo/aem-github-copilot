@@ -2,6 +2,8 @@
 description: Review AEM headless delivery — Content Fragment models, GraphQL persisted queries, CF Java integration, CORS, and Dispatcher rules
 ---
 
+> Tip: attach `#file:<path>` for the CF model XML, GraphQL query, or Java class to review.
+
 Review the selected file or component for AEM headless issues. Report each finding as **Blocking** / **Warning** / **Suggestion**.
 
 ## Content Fragment models
