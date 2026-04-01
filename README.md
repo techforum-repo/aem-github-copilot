@@ -145,13 +145,25 @@ This separation keeps the guidance easier to maintain and makes it clearer which
 - reusable prompts
 - human-readable examples
 
+### `.vscode/settings.json`
+VS Code workspace-level Copilot settings that wire instruction files to specific editor tasks automatically:
+- `codeGeneration.instructions` — core Java, security, performance, accessibility, and WCM Core Components instructions applied on every code generation task
+- `testGeneration.instructions` — unit test and integration test conventions applied on every test generation task
+- `codeReview.instructions` — security, performance, and packaging instructions applied on every inline code review
+- `commitMessageGeneration.instructions` — AEM module-scoped commit message style
+- `pullRequestDescriptionGeneration.instructions` — PR description format covering modules, risks, and testing notes
+
+These apply automatically in VS Code without any manual prompt selection.
+
+### `AGENTS.md`
+Universal agent instructions file for cross-tool compatibility. Provides the same core AEM conventions to tools that support `AGENTS.md` natively (GitHub Copilot Workspace, OpenAI Codex, and others) without requiring tool-specific configuration files.
+
 ## Suggested next steps
 
 If you want to extend this repo further, the most useful next improvements are:
 - refine prompts based on real team usage
 - expand docs with team-specific examples
 - keep `lsp.json` aligned with the languages actually used in the target AEM repo
-- optionally add `AGENTS.md` if you want broader cross-tool compatibility beyond Copilot
 
 ## Summary
 
