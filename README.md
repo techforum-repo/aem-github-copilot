@@ -47,6 +47,8 @@ Each instruction file is structured to make usage predictable:
 - `Key rules`
 - `Review focus`
 
+Some topics intentionally use companion instruction files for different contexts. For example, XML/content guidance can stay scoped to `ui.content` or `ui.config`, while Java consumption rules for the same topic live in Java-scoped instruction files under `core/src/main/**/*.java`.
+
 ### `.github\prompts\`
 Reusable prompt files for common AEM development and review tasks.
 
@@ -147,9 +149,9 @@ This separation keeps the guidance easier to maintain and makes it clearer which
 
 ### `.vscode/settings.json`
 VS Code workspace-level Copilot settings that wire instruction files to specific editor tasks automatically:
-- `codeGeneration.instructions` — core Java, security, performance, accessibility, and WCM Core Components instructions applied on every code generation task
-- `testGeneration.instructions` — unit test and integration test conventions applied on every test generation task
-- `codeReview.instructions` — security, performance, and packaging instructions applied on every inline code review
+- `codeGeneration.instructions` — repository-wide generation defaults spanning core Java, UI modules, content/config packaging, frontend, accessibility, and WCM Core Components
+- `testGeneration.instructions` — unit test, integration test, UI/frontend, and accessibility conventions applied on every test generation task
+- `codeReview.instructions` — security, performance, packaging, Dispatcher, content/config, and frontend review instructions applied on every inline code review
 - `commitMessageGeneration.instructions` — AEM module-scoped commit message style
 - `pullRequestDescriptionGeneration.instructions` — PR description format covering modules, risks, and testing notes
 
@@ -157,6 +159,8 @@ These apply automatically in VS Code without any manual prompt selection.
 
 ### `AGENTS.md`
 Universal agent instructions file for cross-tool compatibility. Provides the same core AEM conventions to tools that support `AGENTS.md` natively (GitHub Copilot Workspace, OpenAI Codex, and others) without requiring tool-specific configuration files.
+
+To reduce drift, keep broad repository rules in `.github/copilot-instructions.md`, keep `AGENTS.md` aligned with those broad rules, and keep path-specific detail in `.github/instructions/`.
 
 ## Suggested next steps
 

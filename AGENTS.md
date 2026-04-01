@@ -2,6 +2,8 @@
 
 This repository contains an Adobe Experience Manager as a Cloud Service (AEMaaCS) project. Apply AEM package boundaries, Cloud Manager safety rules, and existing module conventions before suggesting or generating changes.
 
+This file mirrors the repository-wide rules in `.github/copilot-instructions.md` for tools that read `AGENTS.md`. Keep those two files aligned, and treat `.github/instructions/` as the more detailed path-scoped source of truth.
+
 ## Module structure
 
 - `core/` — Sling Models, OSGi services, servlets, schedulers, workflow steps, and shared Java logic
@@ -18,13 +20,13 @@ This repository contains an Adobe Experience Manager as a Cloud Service (AEMaaCS
 
 ## Java version
 
-This project targets **Java 21**. Prefer Java 21 language features:
+This project targets **Java 21**. Use Java 21 language features when they improve clarity and fit the existing module conventions:
 - Records for immutable value objects and DTOs
 - Pattern matching for `instanceof`
 - Text blocks for multi-line strings (JCR-SQL2, JSON)
 - Switch expressions (`->` syntax)
 - `var` for local variable type inference where the type is obvious
-- Sealed classes to restrict Sling Model or service hierarchies
+- Sealed classes only when the hierarchy should be explicitly constrained
 
 ## Core rules
 

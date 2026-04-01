@@ -17,13 +17,13 @@ This repository contains an Adobe Experience Manager as a Cloud Service (AEMaaCS
 
 ## Java version
 
-This project targets **Java 21**. Prefer Java 21 language features in all new and modified code:
+This project targets **Java 21**. Use Java 21 language features when they improve clarity, fit the existing module conventions, and do not make AEM code harder to maintain:
 - **Records** for immutable value objects and DTOs instead of manual classes with constructors, getters, and `equals`/`hashCode`
 - **Pattern matching for `instanceof`** — use `instanceof Foo f` instead of casting after a type check
 - **Text blocks** for multi-line strings such as JCR-SQL2 queries and JSON templates
 - **Switch expressions** (`->` syntax) instead of statement switches with `break`
-- **`var`** for local variable type inference where the type is obvious from the right-hand side
-- **Sealed classes** to restrict Sling Model or service hierarchies where extension should be controlled
+- **`var`** for local variable type inference where the type stays obvious from the right-hand side
+- **Sealed classes** only when the hierarchy should be explicitly constrained and the pattern already fits the module design
 
 ## Core rules for this repository
 - Prefer Sling Models for component-backed presentation logic and OSGi services for reusable business logic.

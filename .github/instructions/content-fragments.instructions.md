@@ -19,24 +19,17 @@ applyTo: "{ui.content,ui.config}/**/*.{xml,json}"
 - Never expose sensitive content paths or JCR structure details in query responses.
 - Paginate large result sets — use `limit` and `cursor`-based pagination.
 
-## Java / Sling Model integration
-
-- Adapt `Resource` to `ContentFragment` using `resource.adaptTo(ContentFragment.class)` — null-check the result.
-- Use `ContentFragment.getElement(name)` to access fields — handle `null` when the element does not exist.
-- Never adapt `SlingHttpServletRequest` to `ContentFragment` directly.
-- Use the `AssetManager` or `FragmentTemplate` API for programmatic fragment creation, not manual JCR writes.
-
 ## Headless delivery
 
 - All headless endpoints must go through the AEM GraphQL servlet — never expose raw JCR APIs.
 - Dispatcher must allow `/graphql/execute.json/*` for persisted query execution.
 - CORS configuration must be in `ui.config` — not hardcoded in servlet filters.
 - Test CF model changes against existing fragments before deploying — field renames are breaking changes.
+- Keep Java-specific Content Fragment access rules in a companion Java-scoped instruction file so they apply when editing `core` code.
 
 ## Review focus
 
 - Are CF model changes backward-compatible with existing fragments?
 - Are persisted queries used rather than ad-hoc queries?
 - Is pagination applied to queries that could return large result sets?
-- Are `adaptTo(ContentFragment.class)` results null-checked?
 - Is CORS configured via OSGi in `ui.config`?
